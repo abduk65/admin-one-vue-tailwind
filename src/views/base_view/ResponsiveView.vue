@@ -1,6 +1,6 @@
 <script setup>
-import SectionTitle from '@/components/SectionTitle.vue'
-import SectionMain from '@/components/SectionMain.vue'
+import SectionTitle from '@/components/section/SectionTitle.vue'
+import SectionMain from '@/components/section/SectionMain.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 </script>
 

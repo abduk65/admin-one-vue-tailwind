@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useMainStore } from '@/stores/main'
 import FormControlIcon from '@/components/FormControlIcon.vue'
 
@@ -36,6 +36,10 @@ const props = defineProps({
     type: Array,
     default: null
   },
+  optionLabel: {
+    type: String,
+    default: 'name'
+  },
   type: {
     type: String,
     default: 'text'
@@ -43,6 +47,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean, Array, Object],
     default: ''
+  },
+  readonly: {
+    type: Boolean,
+    default: false
   },
   required: Boolean,
   borderless: Boolean,
@@ -68,6 +76,10 @@ const inputElClass = computed(() => {
     props.transparent ? 'bg-transparent' : 'bg-white dark:bg-slate-800'
   ]
 
+  if (props.readonly) {
+    base.push('bg-gray-100')
+  }
+
   if (props.icon) {
     base.push('pl-10')
   }
@@ -86,6 +98,9 @@ const selectEl = ref(null)
 const textareaEl = ref(null)
 
 const inputEl = ref(null)
+
+const optionLabel = computed(() => props.optionLabel)
+
 
 onMounted(() => {
   if (selectEl.value) {
@@ -115,7 +130,7 @@ if (props.ctrlKFocus) {
       // console.error('Duplicate field focus event')
     }
   })
-
+  console.log(computedValue,  '-f-f-f-f-f-f-f-f-f-f-f',props.modelValue)
   onBeforeUnmount(() => {
     window.removeEventListener('keydown', fieldFocusHook)
     mainStore.isFieldFocusRegistered = false
@@ -132,34 +147,20 @@ if (props.ctrlKFocus) {
       :name="name"
       :class="inputElClass"
     >
-      <option v-for="option in options" :key="option.id ?? option" :value="option">
-        {{ option.label ?? option }}
+      <option value="">Select an option</option>
+      <option
+        v-for="option in options"
+        :key="option.id"
+        :value="option.id"
+      >
+        {{ option[optionLabel] }}
       </option>
     </select>
-    <textarea
-      v-else-if="computedType === 'textarea'"
-      :id="id"
-      v-model="computedValue"
-      :class="inputElClass"
-      :name="name"
-      :maxlength="maxlength"
-      :placeholder="placeholder"
-      :required="required"
-    />
-    <input
-      v-else
-      :id="id"
-      ref="inputEl"
-      v-model="computedValue"
-      :name="name"
-      :maxlength="maxlength"
-      :inputmode="inputmode"
-      :autocomplete="autocomplete"
-      :required="required"
-      :placeholder="placeholder"
-      :type="computedType"
-      :class="inputElClass"
-    />
+    <textarea v-else-if="computedType === 'textarea'" :id="id" v-model="computedValue" :class="inputElClass"
+      :name="name" :maxlength="maxlength" :placeholder="placeholder" :required="required" />
+    <input v-else :id="id" ref="inputEl" v-model="computedValue" :name="name" :maxlength="maxlength"
+      :readonly="props.readonly" :inputmode="inputmode" :autocomplete="autocomplete" :required="required"
+      :placeholder="placeholder" :type="computedType" :class="inputElClass" />
     <FormControlIcon v-if="icon" :icon="icon" :h="controlIconH" />
   </div>
 </template>

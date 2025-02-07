@@ -44,6 +44,7 @@ const asideLgCloseClick = (event) => {
           <BaseIcon :path="mdiClose" />
         </button>
       </div>
+
       <div
         class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars dark:aside-scrollbars-[slate]"
       >

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -32,6 +32,18 @@ const componentClass = computed(() => [
 ])
 
 const hasDropdown = computed(() => !!props.item.menu)
+const router = useRouter()
+const isRouteAllowed = (routePath ) => {
+  // try {
+  //   const route = router.resolve({ path: routePath })
+  //   const role = JSON.parse(localStorage.getItem('user')).role
+  //   // if(rr.meta.allowedRoles) return true
+  //   return route.meta.allowedRoles.includes(role)
+  // }catch (e){
+    // console.log('ROUTE IS NOT PROTECTED SO ITS JUST DISPLAYING', props.item)
+    return true
+  // }
+}
 
 const menuClick = (event) => {
   emit('menu-click', event, props.item)
@@ -43,7 +55,7 @@ const menuClick = (event) => {
 </script>
 
 <template>
-  <li>
+    <li>
     <component
       :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
@@ -68,7 +80,7 @@ const menuClick = (event) => {
           { 'pr-12': !hasDropdown },
           vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : ''
         ]"
-        >{{ item.label }}</span
+        >{{ $t(item.label) }}</span
       >
       <BaseIcon
         v-if="hasDropdown"
