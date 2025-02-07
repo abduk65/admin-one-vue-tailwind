@@ -9,7 +9,7 @@ import {
   mdiLogout,
   mdiThemeLightDark,
   mdiGithub,
-  mdiReact
+  mdiReact, mdiFlag, mdiFlagOutline, mdiTranslate
 } from '@mdi/js'
 
 export default [
@@ -39,7 +39,7 @@ export default [
     menu: [
       {
         icon: mdiAccount,
-        label: 'My Profile',
+      label: 'My Profile',
         to: '/profile'
       },
       {
@@ -67,10 +67,10 @@ export default [
     isToggleLightDark: true
   },
   {
-    icon: mdiGithub,
-    label: 'GitHub',
+    icon: mdiTranslate,
+    label: 'TRANSLATE',
+    isLocaleSwitcher: true,
     isDesktopNoLabel: true,
-    href: 'https://github.com/justboil/admin-one-vue-tailwind',
     target: '_blank'
   },
   {

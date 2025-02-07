@@ -2,14 +2,14 @@
 import { useForm, Head } from '@inertiajs/vue3'
 import { nextTick, ref } from 'vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
-import SectionFullScreen from '@/components/SectionFullScreen.vue'
-import CardBox from '@/components/CardBox.vue'
-import FormControl from '@/components/FormControl.vue'
-import FormField from '@/components/FormField.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
-import BaseButton from '@/components/BaseButton.vue'
+import SectionFullScreen from '@/components/section/SectionFullScreen.vue'
+import CardBox from '@/components/cardbox/CardBox.vue'
+import FormControl from '@/components/form/FormControl.vue'
+import FormField from '@/components/form/FormField.vue'
+import BaseDivider from '@/components/base/BaseDivider.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
-import BaseLevel from '@/components/BaseLevel.vue'
+import BaseLevel from '@/components/base/BaseLevel.vue'
 
 const recovery = ref(false)
 

@@ -1,7 +1,7 @@
 <script setup>
 import { mdiGithub } from '@mdi/js'
-import BaseButton from '@/components/BaseButton.vue'
-import SectionBanner from '@/components/SectionBanner.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
+import SectionBanner from '@/components/section/SectionBanner.vue'
 import { gradientBgPinkRed } from '@/colors'
 </script>
 

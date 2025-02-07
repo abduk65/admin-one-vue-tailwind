@@ -1,4 +1,3 @@
-
 <template>
   <LayoutAuthenticated>
     <SectionMain>
@@ -11,7 +10,7 @@
 
 
       <CardBox class="mb-6" has-table>
-        <AddRecordBtn label="Add New Brand" to="/addBrand"/>
+        <AddRecordBtn label="Add New Brand" to="/addBrand" />
         <TableSampleClients @delete="deleteRecord" @edit="editRecord" :columns="columns" :received="data" />
       </CardBox>
 
@@ -28,22 +27,19 @@
   </LayoutAuthenticated>
 </template>
 
-<style scoped>
-
-</style>
 
 <script setup>
 
 import { mdiMonitorCellphone, mdiTableBorder, mdiTableOff } from '@mdi/js'
-import SectionMain from '@/components/SectionMain.vue'
+import SectionMain from '@/components/section/SectionMain.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
-import CardBox from '@/components/CardBox.vue'
+import CardBox from '@/components/cardbox/CardBox.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
-import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
+import SectionTitleLineWithButton from '@/components/section/SectionTitleLineWithButton.vue'
+import CardBoxComponentEmpty from '@/components/cardbox/CardBoxComponentEmpty.vue'
 import AddRecordBtn from '@/components/RecordBtnComponent.vue'
 import { onMounted, ref } from 'vue'
-import TableSampleClients from '@/components/TableSampleClients.vue'
+import TableSampleClients from '@/components/table/TableBase.vue'
 import { useBranchStore } from '@/stores/branches'
 import { storeToRefs } from 'pinia'
 import { useBrandStore } from '@/stores/brands'
@@ -57,8 +53,8 @@ onMounted(() => {
   dataStore.getData
 });
 
-const editRecord = (record) =>{
-  router.push({name: "EditBrand", params: {id: record.original.id}})
+const editRecord = (record) => {
+  router.push({ name: "EditBrand", params: { id: record.original.id } })
 }
 
 const deleteRecord = (record) => {
@@ -87,3 +83,5 @@ const columns = [
 ]
 
 </script>
+
+<style scoped></style>

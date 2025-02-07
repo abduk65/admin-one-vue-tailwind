@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useMainStore } from '@/stores/main'
-import FormControlIcon from '@/components/FormControlIcon.vue'
+import FormControlIcon from '@/components/form/FormControlIcon.vue'
 
 const props = defineProps({
   name: {
@@ -130,7 +130,6 @@ if (props.ctrlKFocus) {
       // console.error('Duplicate field focus event')
     }
   })
-  console.log(computedValue,  '-f-f-f-f-f-f-f-f-f-f-f',props.modelValue)
   onBeforeUnmount(() => {
     window.removeEventListener('keydown', fieldFocusHook)
     mainStore.isFieldFocusRegistered = false
@@ -140,19 +139,9 @@ if (props.ctrlKFocus) {
 
 <template>
   <div class="relative">
-    <select
-      v-if="computedType === 'select'"
-      :id="id"
-      v-model="computedValue"
-      :name="name"
-      :class="inputElClass"
-    >
+    <select v-if="computedType === 'select'" :id="id" v-model="computedValue" :name="name" :class="inputElClass">
       <option value="">Select an option</option>
-      <option
-        v-for="option in options"
-        :key="option.id"
-        :value="option.id"
-      >
+      <option v-for="option in options" :key="option.id" :value="option.id">
         {{ option[optionLabel] }}
       </option>
     </select>

@@ -11,4 +11,8 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
   },
+  rules: {
+    "no-unused-vars": "off",
+    "first-attribute-linebreak": "off"
+  }
 };

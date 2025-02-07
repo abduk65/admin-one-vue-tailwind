@@ -2,17 +2,17 @@
 import { useForm, Head, Link } from '@inertiajs/vue3'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
-import SectionFullScreen from '@/components/SectionFullScreen.vue'
-import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
+import SectionFullScreen from '@/components/section/SectionFullScreen.vue'
+import CardBox from '@/components/cardbox/CardBox.vue'
+import FormCheckRadioGroup from '@/components/form/FormCheckRadioGroup.vue'
+import FormField from '@/components/form/FormField.vue'
+import FormControl from '@/components/form/FormControl.vue'
+import BaseDivider from '@/components/base/BaseDivider.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
+import BaseButtons from '@/components/base/BaseButtons.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
 import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
-import BaseLevel from '@/components/BaseLevel.vue'
+import BaseLevel from '@/components/base/BaseLevel.vue'
 
 const props = defineProps({
   canResetPassword: Boolean,
@@ -55,7 +55,7 @@ const submit = () => {
       >
         <FormValidationErrors />
 
-        <NotificationBarInCard 
+        <NotificationBarInCard
           v-if="status"
           color="info"
         >

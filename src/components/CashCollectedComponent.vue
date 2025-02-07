@@ -1,8 +1,5 @@
-
-
 <template>
-
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitForm" >
       <FormField label="Branch">
         <FormControl v-model="cashCollected.branch_id" :error="errors" :options="branches" />
       </FormField>
@@ -12,15 +9,14 @@
 
       <BaseButton type="submit" label="Submit" :loading="isSubmitting" />
     </form>
-
 </template>
 
 <script setup>
 
-import FormControl from '@/components/FormControl.vue'
-import FormField from '@/components/FormField.vue'
-import SectionMain from '@/components/SectionMain.vue'
-import BaseButton from '@/components/BaseButton.vue'
+import FormControl from '@/components/form/FormControl.vue'
+import FormField from '@/components/form/FormField.vue'
+import SectionMain from '@/components/section/SectionMain.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBranchStore } from '@/stores/branches'
 import { computed, onMounted, reactive, ref } from 'vue'
@@ -41,7 +37,6 @@ onMounted(() => {
 const cashCollected = reactive({
   branch_id: "", amount: ""
 })
-
 const errors = reactive({ name: "", type: "" })
 const isSubmitting = ref(false)
 

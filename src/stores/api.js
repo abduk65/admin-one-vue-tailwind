@@ -1,26 +1,47 @@
 import axios from 'axios'
 import axiosClient from '@/stores/axios'
 
-
-export const getRequest = async (store, uri, idPassed ) => {
-  try{
+export const getRequest = async (store, uri, idPassed) => {
+  try {
     const id = idPassed ?? '';
     const url = `/${uri}/${id}`
-    console.log(url, 'uri')
-    console.log(store, 'STORE')
-    const {data} = await axiosClient.get(url);
-    store.data.value = data;
+    const response = await axiosClient.get(url);
+    store.data.value = response.data;
   } catch (e) {
     console.error(e);
   }
-
 }
 
-export const postRequest = async ( gebi, uri, ) => {
+export const postRequest = async (gebi, uri,) => {
   try {
-    const {data} = axiosClient.post(uri, gebi)
-    console.log(data, 'REPORTED BACK DATA')
+    console.log(gebi, "with uri", uri, 'GEBI')
+    const response = await axiosClient.post(uri, gebi)
+    return response.data;
   } catch (err) {
     console.error('Error creating request request', err)
+  }
+}
+
+export const putRequest = async (updatedData, uri,) => {
+  try {
+    console.log(updatedData, "with uri", uri, 'UPDATE')
+    console.log(`${uri}/${updatedData.id}`, updatedData);
+    const response = await axiosClient.put(`${uri}/${updatedData.id}`, updatedData)
+    console.log(response, 'returned data')
+    return response.data;
+  } catch (err) {
+    console.error('Error creating request request', err)
+  }
+}
+
+export const deleteRequest = async (uri, id) => {
+  try {
+    const url = `/${uri}/${id}`;
+    console.log(`Deleting from ${url}`);
+    const response = await axiosClient.delete(url);
+    return response.data;
+  } catch (err) {
+    console.error('Error deleting request', err);
+    throw err;
   }
 }

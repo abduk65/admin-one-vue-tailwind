@@ -15,8 +15,8 @@
 <script setup>
 
 import { computed, isReactive, isRef, ref, toRef, toRefs, watch } from 'vue'
-import BaseButton from '@/components/BaseButton.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
+import SectionTitle from '@/components/section/SectionTitle.vue'
 import { mdiCloseBoxMultipleOutline } from '@mdi/js/commonjs/mdi'
 import { useBranchStore } from '@/stores/branches'
 import { storeToRefs } from 'pinia'

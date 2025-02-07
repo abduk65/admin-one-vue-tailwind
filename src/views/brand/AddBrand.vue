@@ -15,16 +15,16 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import axiosClient from '@/stores/axios'
 import { useProductTypeStore } from '@/stores/productType'
 import { storeToRefs } from 'pinia'
-import FormControl from '@/components/FormControl.vue'
-import FormField from '@/components/FormField.vue'
-import BaseButton from '@/components/BaseButton.vue'
+import FormControl from '@/components/form/FormControl.vue'
+import FormField from '@/components/form/FormField.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 import { useBrandStore } from '@/stores/brands'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import { ErrorMessage, Field, Form } from 'vee-validate'
 import { useRoute, useRouter } from 'vue-router'
 import * as yup from 'yup';
 import DynamicForm from '@/components/DynamicForm.vue'
-import SectionMain from '@/components/SectionMain.vue'
+import SectionMain from '@/components/section/SectionMain.vue'
 
 const productTypeStore = useProductTypeStore()
 const brandStore = useBrandStore()

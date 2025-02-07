@@ -3,10 +3,10 @@ import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import { RouterLink } from 'vue-router'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useAuthStore } from '@/stores/authentication.js'
-import BaseIcon from '@/components/BaseIcon.vue'
-import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
-import NavBarMenuList from '@/components/NavBarMenuList.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
+import BaseIcon from '@/components/base/BaseIcon.vue'
+import UserAvatarCurrentUser from '@/components/user/UserAvatarCurrentUser.vue'
+import NavBarMenuList from '@/components/navbar/NavBarMenuList.vue'
+import BaseDivider from '@/components/base/BaseDivider.vue'
 
 const props = defineProps({
   item: {

@@ -1,9 +1,9 @@
 <script setup>
 import { mdiLogout, mdiClose } from '@mdi/js'
 import { computed } from 'vue'
-import AsideMenuList from '@/components/AsideMenuList.vue'
-import AsideMenuItem from '@/components/AsideMenuItem.vue'
-import BaseIcon from '@/components/BaseIcon.vue'
+import AsideMenuList from '@/components/aside/AsideMenuList.vue'
+import AsideMenuItem from '@/components/aside/AsideMenuItem.vue'
+import BaseIcon from '@/components/base/BaseIcon.vue'
 
 defineProps({
   menu: {

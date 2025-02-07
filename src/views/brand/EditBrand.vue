@@ -10,6 +10,7 @@
           Update Brand
         </button>
       </Form>
+      {{ initialData }}
     </SectionMain>
   </LayoutAuthenticated>
 </template>
@@ -19,10 +20,11 @@ import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 import { computed, onMounted } from 'vue';
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue';
-import SectionMain from '@/components/SectionMain.vue';
+import SectionMain from '@/components/section/SectionMain.vue';
 import ValidatedFormControl from '@/components/ValidatedFormControl.vue';
 import { useProductTypeStore } from '@/stores/productType';
 import { useBrandStore } from '@/stores/brands';
+import { useRouter } from 'vue-router';
 
 const props = defineProps(['id']);
 const productTypeStore = useProductTypeStore();
@@ -41,7 +43,9 @@ onMounted(async () => {
 });
 
 const initialData = computed(() => {
+
   const brand = brandStore.data.find(val => Number(val.id) === Number(props.id));
+  console.log('BRAND, ', brand)
   if (brand) {
     return {
       name: brand.name,
@@ -59,6 +63,7 @@ const formattedSelectOptions = computed(() =>
   }))
 );
 
+const router = useRouter()
 const onSubmit = async (values) => {
   const updateData = {
     id: props.id,
@@ -67,7 +72,17 @@ const onSubmit = async (values) => {
   };
 
   console.log('Submitting:', updateData);
-  await brandStore.putData(updateData, 'brands');
+  const response = await brandStore.putData(updateData, 'brands');
+  console.log(response)
+  if (response.data.id) {
+    // Update the store data with the response
+    const updatedBrand = response.data;
+    const brandIndex = brandStore.data.findIndex(b => b.id === updatedBrand.id);
+    if (brandIndex !== -1) {
+      brandStore.data[brandIndex] = updatedBrand;
+    }
+    router.push('/brands');
+  }
 };
 </script>
 

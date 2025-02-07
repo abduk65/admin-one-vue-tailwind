@@ -17,12 +17,99 @@ export default [
   {
     to: '/dashboard',
     icon: mdiMonitor,
-    label: 'Dashboard'
+    label: 'dashboard',
   },
   {
-    to: '/tables',
-    label: 'Tables',
+    to: '/dailySales',
+    label: 'Daily Sales',
     icon: mdiTable
+  },
+  {
+    to: '/inventoryItem',
+    label: 'Inventory Items',
+    icon: mdiTable
+  },
+  {
+    to: '/dailyInventoryOut',
+    label: 'Daily Inventory Out',
+    icon: mdiTable
+  },
+  {
+    to: '/cashCollected',
+    label: 'Cash Collected',
+    icon: mdiTable
+  },
+  {
+    to: '/workOrders',
+    label: 'Work Orders',
+    icon: mdiTable
+  },
+
+  {
+    to: '/expenses',
+    icon: mdiViewList,
+    label: 'View Expenses'
+  },
+  {
+    to: '/profitReport',
+    label: 'Profit Report',
+    icon: mdiTable
+  },
+  {
+    label:'EXPAND',
+    icon: mdiViewList,
+    menu: [
+      {
+        to: '/branches',
+        label: 'Branches',
+        icon: mdiTable
+      },
+      {
+        to: '/brands',
+        label: 'brands',
+        icon: mdiTable
+      },
+      {
+        to: '/commissionRecipients',
+        label: 'Commission Recipient',
+        icon: mdiTable
+      },
+      {
+        to: '/commissions',
+        label: 'Commission',
+        icon: mdiTable
+      },
+      {
+        to: '/unit',
+        label: 'Unit',
+        icon: mdiTable
+      },
+      {
+        to: '/productType',
+        label: 'Product Type',
+        icon: mdiTable
+      },
+      {
+        to: '/recipes',
+        label: 'Recipes',
+        icon: mdiTable
+      },
+      {
+        to: '/products',
+        label: 'Products',
+        icon: mdiTable
+      },
+      {
+        to: '/inventory-adjustments',
+        label: 'Inventory Adjustments',
+        icon: mdiTable
+      },
+      {
+        to: '/standardBatchVariety',
+        label: 'Standard Batch Variety',
+        icon: mdiTable
+      },
+    ]
   },
   {
     to: '/forms',
@@ -40,7 +127,7 @@ export default [
     icon: mdiResponsive
   },
   {
-    to: '/',
+    to: '/style',
     label: 'Styles',
     icon: mdiPalette
   },
@@ -49,38 +136,4 @@ export default [
     label: 'Profile',
     icon: mdiAccountCircle
   },
-  {
-    to: '/login',
-    label: 'Login',
-    icon: mdiLock
-  },
-  {
-    to: '/error',
-    label: 'Error',
-    icon: mdiAlertCircle
-  },
-  {
-    label: 'Dropdown',
-    icon: mdiViewList,
-    menu: [
-      {
-        label: 'Item One'
-      },
-      {
-        label: 'Item Two'
-      }
-    ]
-  },
-  {
-    href: 'https://github.com/justboil/admin-one-vue-tailwind',
-    label: 'GitHub',
-    icon: mdiGithub,
-    target: '_blank'
-  },
-  {
-    href: 'https://github.com/justboil/admin-one-react-tailwind',
-    label: 'React version',
-    icon: mdiReact,
-    target: '_blank'
-  }
 ]

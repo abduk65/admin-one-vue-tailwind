@@ -11,7 +11,7 @@
           <FormField label="Branch Type">
             <FormControl v-model="branch.type" :options="branchTypes" :error="errors.type" />
           </FormField>
-          <BaseButton type="submit" label="Submit" @click="createBranch" :loading="isSubmitting" />
+          <BaseButton type="submit" label="Submit" :loading="isSubmitting" />
         </FormField>
       </form>
     </SectionMain>
@@ -21,10 +21,10 @@
 <script setup>
 
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionMain from '@/components/SectionMain.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
-import BaseButton from '@/components/BaseButton.vue'
+import SectionMain from '@/components/section/SectionMain.vue'
+import FormField from '@/components/form/FormField.vue'
+import FormControl from '@/components/form/FormControl.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
 import { useBranchStore } from '@/stores/branches'
 import { useRouter, useRoute } from 'vue-router'
 import { reactive, ref, computed } from 'vue'

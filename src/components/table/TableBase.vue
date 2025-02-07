@@ -39,12 +39,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="row in table.getRowModel().rows" :key="row.id">
+      <tr v-for="row in table.getRowModel().rows" 
+          :key="row.id"
+          class="cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900/50"
+          @click="$emit('row-click', row)">
         <td v-for="cell in row.getVisibleCells()" :key="cell.id">
           <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()"> </FlexRender>
         </td>
-        <BaseButton :key="row.id" label="Edit" type="submit" color="info" @click="handleEdit(row)" />
-        <BaseButton :key="row.id" label="Delete" type="submit" color="info" @click="handleDelete(row)" />
+        <td class="flex gap-2">
+          <BaseButton :key="'edit-'+row.id" label="Edit" type="submit" color="info" @click.stop="handleEdit(row)" />
+          <BaseButton :key="'delete-'+row.id" label="Delete" type="submit" color="danger" @click.stop="handleDelete(row)" />
+        </td>
       </tr>
     </tbody>
   </table>
@@ -58,7 +63,6 @@
     </BaseLevel>
   </div>
 </template>
-
 
 <script setup>
 import { ref, watch, onMounted, computed, reactive, isReactive, isRef } from 'vue'
@@ -149,7 +153,7 @@ const pagesList = computed(() => {
 })
 
 const router = useRouter()
-const emit = defineEmits(['delete', 'edit'])
+const emit = defineEmits(['delete', 'edit', 'row-click'])
 
 const handleDelete = (record) => {
   // router.push(`/branches/${record.id}`)

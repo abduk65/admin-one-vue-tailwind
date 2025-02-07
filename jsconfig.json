@@ -1,9 +1,24 @@
+// {
+//   "compilerOptions": {
+//   "baseUrl": ".",
+//     "paths": {
+//     "@/*": ["src/*"]
+//   }
+// },
+//   "exclude": ["node_modules", "dist"]
+// }
 {
   "compilerOptions": {
-  "baseUrl": ".",
+    "target": "ESNext",
+    "baseUrl": ".",
     "paths": {
-    "@/*": ["src/*"]
-  }
-},
+      "@/*": ["src/*"]
+    },
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "checkJs": true
+  },
+  "include": ["src/**/*.js", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]
 }
