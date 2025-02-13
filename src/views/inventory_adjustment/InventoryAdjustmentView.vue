@@ -13,11 +13,13 @@ import TableSampleClients from '@/components/table/TableBase.vue'
 import AddRecordBtn from '@/components/RecordBtnComponent.vue'
 
 const router = useRouter()
-const store = useInventoryAdjustmentStore()
+const inventoryAdjustmentStore = useInventoryAdjustmentStore()
 const items = ref([])
 
 onMounted(async () => {
-  items.value = await store.fetchInventoryAdjustments()
+  console.log('items.', items, inventoryAdjustmentStore)
+  items.value = await inventoryAdjustmentStore.fetchInventoryAdjustments()
+  console.log('items.', items)
 })
 
 const columns = [
@@ -49,7 +51,7 @@ const handleEdit = (row) => {
 
 const handleDelete = async (row) => {
   try {
-    await store.deleteInventoryAdjustment(row.original.id)
+    await inventoryAdjustmentStore.deleteInventoryAdjustment(row.original.id)
     items.value = items.value.filter(item => item.id !== row.original.id)
   } catch (error) {
     console.error('Error deleting inventory adjustment:', error)
@@ -68,12 +70,7 @@ const handleDelete = async (row) => {
 
       <CardBox class="mb-6" has-table>
         <AddRecordBtn label="New Adjustment" to="/addInventoryAdjustment" />
-        <TableSampleClients
-          :columns="columns"
-          :received="items"
-          @edit="handleEdit"
-          @delete="handleDelete"
-        />
+        <TableSampleClients :columns="columns" :received="items" @edit="handleEdit" @delete="handleDelete" />
       </CardBox>
 
       <SectionTitleLineWithButton :icon="mdiTableOff" title="Empty variation" />

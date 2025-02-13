@@ -56,7 +56,7 @@ export default [
     icon: mdiTable
   },
   {
-    label:'EXPAND',
+    label: 'EXPAND',
     icon: mdiViewList,
     menu: [
       {
@@ -100,7 +100,7 @@ export default [
         icon: mdiTable
       },
       {
-        to: '/inventory-adjustments',
+        to: '/inventoryAdjustments',
         label: 'Inventory Adjustments',
         icon: mdiTable
       },

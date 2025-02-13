@@ -535,7 +535,7 @@ const routes = [
           title: 'Inventory Adjustments',
           allowedRoles: ['worker', 'store_keeper', 'admin']
         },
-        path: 'inventory-adjustments',
+        path: 'inventoryAdjustments',
         name: 'InventoryAdjustment',
         component: () => import('@/views/inventory_adjustment/InventoryAdjustmentView.vue')
       },
@@ -544,7 +544,7 @@ const routes = [
           title: 'Add Inventory Adjustment',
           allowedRoles: ['worker', 'store_keeper', 'admin']
         },
-        path: 'add-inventory-adjustment',
+        path: 'addInventoryAdjustment',
         name: 'AddInventoryAdjustment',
         component: () => import('@/views/inventory_adjustment/AddInventoryAdjustment.vue')
       },
@@ -553,7 +553,7 @@ const routes = [
           title: 'Edit Inventory Adjustment',
           allowedRoles: ['worker', 'store_keeper', 'admin']
         },
-        path: 'edit-inventory-adjustment/:id',
+        path: 'editInventoryAdjustment/:id',
         name: 'EditInventoryAdjustment',
         component: () => import('@/views/inventory_adjustment/EditInventoryAdjustment.vue'),
         props: true

@@ -2,11 +2,12 @@
 import { ref } from 'vue'
 import { useInventoryAdjustmentStore } from '@/stores/inventoryAdjustment'
 import { useRouter } from 'vue-router'
-import CardComponent from '@/components/CardComponent.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
+// import CardComponent from '@/components/CardComponent.vue'
+import SectionMain from '@/components/section/SectionMain.vue'
+// import TitleBar from '@/components/TitleBar.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
+import FormField from '@/components/form/FormField.vue'
+import FormControl from '@/components/form/FormControl.vue'
 import { useInventoryItemStore } from '@/stores/inventoryItem'
 
 const router = useRouter()
@@ -39,29 +40,21 @@ const submit = async () => {
 </script>
 
 <template>
-  <TitleBar :title-stack="['Inventory Management', 'Add Inventory Adjustment']" />
+  <!-- <TitleBar :title-stack="['Inventory Management', 'Add Inventory Adjustment']" /> -->
 
-  <CardComponent>
+  <SectionMain>
     <form @submit.prevent="submit">
       <FormField label="Inventory Item">
         <FormControl v-model="form.inventory_item_id" type="select">
           <option value="">Select an item</option>
-          <option
-            v-for="item in inventoryItems"
-            :key="item.id"
-            :value="item.id"
-          >
+          <option v-for="item in inventoryItems" :key="item.id" :value="item.id">
             {{ item.name }}
           </option>
         </FormControl>
       </FormField>
 
       <FormField label="Quantity">
-        <FormControl
-          v-model="form.quantity"
-          type="number"
-          placeholder="Enter quantity"
-        />
+        <FormControl v-model="form.quantity" type="number" placeholder="Enter quantity" />
       </FormField>
 
       <FormField label="Adjustment Type">
@@ -77,23 +70,13 @@ const submit = async () => {
       </FormField>
 
       <FormField label="Notes">
-        <FormControl
-          v-model="form.notes"
-          type="textarea"
-          placeholder="Enter notes"
-        />
+        <FormControl v-model="form.notes" type="textarea" placeholder="Enter notes" />
       </FormField>
 
       <div class="flex justify-end space-x-2">
-        <BaseButton
-          type="button"
-          color="info"
-          outline
-          label="Cancel"
-          @click="router.back()"
-        />
+        <BaseButton type="button" color="info" outline label="Cancel" @click="router.back()" />
         <BaseButton type="submit" color="info" label="Save" />
       </div>
     </form>
-  </CardComponent>
+  </SectionMain>
 </template>
