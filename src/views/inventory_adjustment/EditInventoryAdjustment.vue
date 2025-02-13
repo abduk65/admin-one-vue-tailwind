@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useInventoryAdjustmentStore } from '@/stores/inventoryAdjustment'
 import { useRouter, useRoute } from 'vue-router'
-import CardComponent from '@/components/CardComponent.vue'
+import CardBox from '@/components/cardbox/CardBox.vue'
 // import TitleBar from '@/components/TitleBar.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FormField from '@/components/form/FormField.vue'
@@ -24,7 +24,8 @@ const form = ref({
 })
 
 const loadInventoryItems = async () => {
-  inventoryItems.value = await inventoryItemStore.fetch
+  await inventoryItemStore.getInventoryItem
+  inventoryItems.value = inventoryItemStore.data
 }
 
 const loadAdjustment = async () => {
@@ -50,9 +51,8 @@ const submit = async () => {
 </script>
 
 <template>
-  <!-- <TitleBar :title-stack="['Inventory Management', 'Edit Inventory Adjustment']" /> -->
 
-  <CardComponent>
+  <CardBox>
     <form @submit.prevent="submit">
       <FormField label="Inventory Item">
         <FormControl v-model="form.inventory_item_id" type="select">
@@ -88,5 +88,5 @@ const submit = async () => {
         <BaseButton type="submit" color="info" label="Save" />
       </div>
     </form>
-  </CardComponent>
+  </CardBox>
 </template>
