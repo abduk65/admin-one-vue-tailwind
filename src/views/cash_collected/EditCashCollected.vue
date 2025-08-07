@@ -2,11 +2,12 @@
   <LayoutAuthenticated>
     <SectionMain>
       <Form v-if="initialData" :initial-values="initialData" @submit="onSubmit" :validation-schema="schema">
-        <ValidatedFormControl name="name" placeholder="Enter recipient name" />
-        <ValidatedFormControl name="branch_id" :options="formattedBranchOptions" type="select" option-label="name" />
+        <ValidatedFormControl name="branch_id" :options="formattedBranchOptions" type="select" option-label="name"
+          placeholder="Select Branch" />
+        <ValidatedFormControl name="amount" type="number" placeholder="Enter amount" />
 
         <button type="submit" class="btn btn-primary">
-          Update Commission Recipient
+          Update Cash Collection
         </button>
       </Form>
     </SectionMain>
@@ -21,36 +22,37 @@ import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue';
 import SectionMain from '@/components/section/SectionMain.vue';
 import ValidatedFormControl from '@/components/ValidatedFormControl.vue';
 import { useBranchStore } from '@/stores/branches';
-import { useCommissionRecipientStore } from '@/stores/CommissionRecipient';
+import { useCashCollectedStore } from '@/stores/cashCollected';
 import { useRouter } from 'vue-router';
 
 const props = defineProps(['id']);
 const branchStore = useBranchStore();
-const commissionRecipientStore = useCommissionRecipientStore();
+const cashCollectedStore = useCashCollectedStore();
 
 const schema = Yup.object({
-  name: Yup.string().required('Name is required'),
   branch_id: Yup.mixed().required('Branch is required'),
+  amount: Yup.number().required('Amount is required').positive('Amount must be positive'),
 });
 
 onMounted(async () => {
   await Promise.all([
-    commissionRecipientStore.getCommission(),
-    branchStore.getBranches
+    cashCollectedStore.getCashCollected(),
+    branchStore.getBranches()
   ]);
 });
 
 const initialData = computed(() => {
-  const recipient = commissionRecipientStore.data.find(val => Number(val.id) === Number(props.id));
-  if (recipient) {
+  const cashCollection = cashCollectedStore.data.find(val => Number(val.id) === Number(props.id));
+  if (cashCollection) {
     return {
-      name: recipient.name,
-      branch_id: recipient.branch?.id || recipient.branch_id
+      branch_id: cashCollection.branch_id,
+      amount: cashCollection.amount,
     };
   }
   return null;
 });
 
+// Format options for the branch select
 const formattedBranchOptions = computed(() =>
   branchStore.branches.map(branch => ({
     id: branch.id,
@@ -58,19 +60,20 @@ const formattedBranchOptions = computed(() =>
   }))
 );
 
-const router = useRouter()
-
+const router = useRouter();
 const onSubmit = async (values) => {
   const updateData = {
     id: props.id,
-    name: values.name,
-    branch_id: values.branch_id
+    branch_id: values.branch_id,
+    amount: values.amount,
   };
 
-  console.log('Submitting:', updateData);
-  const success = await commissionRecipientStore.putCommission(updateData);
-  if (success) {
-    router.push({ name: "CommissionRecipients" });
+  const response = await cashCollectedStore.putCashCollected(updateData, 'cashCollected');
+  console.log(response, 'ram')
+  if (response.id) {
+    router.push('/cashCollected');
   }
 };
 </script>
+
+<style scoped></style>

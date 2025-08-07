@@ -23,6 +23,7 @@ import ValidatedFormControl from '@/components/ValidatedFormControl.vue';
 import { useInventoryItemStore } from '@/stores/inventoryItem';
 import { useBrandStore } from '@/stores/brands';
 import { useUnitStore } from '@/stores/unit';
+import { useRouter } from 'vue-router';
 
 const props = defineProps(['id']);
 const inventoryItemStore = useInventoryItemStore();
@@ -39,9 +40,9 @@ const schema = Yup.object({
 
 onMounted(async () => {
   await Promise.all([
-    inventoryItemStore.getInventoryItem,
-    brandStore.getData,
-    unitStore.getUnits
+    inventoryItemStore.getInventoryItem(),
+    brandStore.getBrands(),
+    unitStore.getUnits()
   ]);
 });
 
@@ -75,6 +76,7 @@ const formattedUnitOptions = computed(() =>
   }))
 );
 
+const router = useRouter()
 const onSubmit = async (values) => {
   const updateData = {
     id: props.id,
@@ -86,6 +88,9 @@ const onSubmit = async (values) => {
   };
 
   console.log('Submitting form with data:', updateData);
-  await inventoryItemStore.putData(updateData, 'inventory-items');
+  const response = await inventoryItemStore.putData(updateData, 'inventoryItem');
+  if (response.id) {
+    router.push({ name: 'InventoryItem' })
+  }
 };
 </script>

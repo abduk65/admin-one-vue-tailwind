@@ -13,7 +13,8 @@
 
           <!-- Product Selection -->
           <FormField label="Product" help="Select the product for this recipe">
-            <select v-model="form.product_id" class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200" required>
+            <select v-model="form.product_id"
+              class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200" required>
               <option value="">Select a product</option>
               <option v-for="product in products" :key="product.id" :value="product.id">
                 {{ product.name }} ({{ product.type }})
@@ -32,12 +33,14 @@
               <label class="font-bold">Ingredients</label>
               <BaseButton type="button" color="info" label="Add Ingredient" @click="addIngredient" />
             </div>
-            
+
             <div v-for="(ingredient, index) in form.ingredients" :key="index" class="mb-4 p-4 bg-gray-800 rounded-lg">
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Item Selection -->
                 <FormField label="Item">
-                  <select v-model="ingredient.inventory_item_id" class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200" required>
+                  <select v-model="ingredient.inventory_item_id"
+                    class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                    required>
                     <option value="">Select an item</option>
                     <option v-for="item in inventoryItems" :key="item.id" :value="item.id">
                       {{ item.name }} (Batch #{{ item.batch_number }})
@@ -52,7 +55,9 @@
 
                 <!-- Unit -->
                 <FormField label="Unit">
-                  <select v-model="ingredient.unit_id" class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200" required>
+                  <select v-model="ingredient.unit_id"
+                    class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                    required>
                     <option value="">Select a unit</option>
                     <option v-for="unit in units" :key="unit.id" :value="unit.id">
                       {{ unit.name }}
@@ -139,7 +144,7 @@ onMounted(async () => {
       recipeStore.getInventoryItems(),
       recipeStore.getUnits()
     ])
-    
+
     products.value = productsData
     inventoryItems.value = itemsData
     units.value = unitsData

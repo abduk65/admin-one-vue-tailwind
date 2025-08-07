@@ -5,7 +5,7 @@ import { id } from 'date-fns/locale'
 import axios from 'axios'
 export const useDailySalesStore = defineStore('dailySales', () => {
   const sales = ref([])
-  const getData = async () => {
+  const getDailySales = async () => {
     try {
       const { data } = await axiosClient.get('/dailySales')
       sales.value = data
@@ -14,22 +14,22 @@ export const useDailySalesStore = defineStore('dailySales', () => {
     }
   }
 
-  const createDailySales = async (input)=> {
-    const {data} =  await axiosClient.post('/createDailySales', input, {
+  const createDailySales = async (input) => {
+    const { data } = await axiosClient.post('/createDailySales', input, {
       headers: {
-          'Content-Type': 'application/json'
-        }
+        'Content-Type': 'application/json'
       }
+    }
     )
     console.log(data, 'DATA FROM BACKEND FOR SALES DATA')
-   //  const response = await axios.post('http://localhost:8029/api/createDailySales', input, {
-   //    headers: {
-   //      'Content-Type': 'application/json'
-   //    }
-   //  });
-   //  console.log(response)
+    //  const response = await axios.post('http://localhost:8029/api/createDailySales', input, {
+    //    headers: {
+    //      'Content-Type': 'application/json'
+    //    }
+    //  });
+    //  console.log(response)
   }
 
-  return { getData, sales,  createDailySales }
+  return { getDailySales, sales, createDailySales }
 
 })

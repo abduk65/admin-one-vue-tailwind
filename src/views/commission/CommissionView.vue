@@ -68,13 +68,13 @@ const deleteRecord = (record) => {
 
 const confirmDelete = () => {
   if (recordToDelete.value) {
-    dataStore.deleteMM(recordToDelete.value.id)
+    // dataStore.deleteMM(recordToDelete.value.id)
     recordToDelete.value = null
   }
 }
 
 onMounted(() => {
-  dataStore.getCommission
+  dataStore.getCommission()
 });
 
 const columns = [

@@ -1,22 +1,18 @@
 <template>
   <div>
     <div class="tabs">
-      <button
-        v-for="branch in branches"
-        :key="branch.id"
-        @click="selectBranch(branch.id || 0)"
-        :class="{ active: branch.id === selectedBranchId }"
-      >
+      <button v-for="branch in branches" :key="branch.id" @click="selectBranch(branch.id || 0)"
+        :class="{ active: branch.id === selectedBranchId }">
         {{ branch.name }}
       </button>
       <button @click="selectBranch(0)">All Branches</button>
       <VueDatePicker v-model="latestDate"></VueDatePicker>
-<!--      <input type="date" class="date picker rounded-3xl bg-stone-800" v-model="latestDate" @change="selectDate($event.target)" />-->
+      <!--      <input type="date" class="date picker rounded-3xl bg-stone-800" v-model="latestDate" @change="selectDate($event.target)" />-->
     </div>
     <table>
       <thead>
-        <tr v-for="headerGroup in table.getHeaderGroups()"  :key="headerGroup.id">
-          <th v-for="header in headerGroup.headers"  :key="header.id">
+        <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
+          <th v-for="header in headerGroup.headers" :key="header.id">
             <FlexRender :render="header.column.columnDef.header" :props="header.getContext()"></FlexRender>
           </th>
         </tr>
@@ -40,20 +36,20 @@ import { storeToRefs } from 'pinia'
 import { computed, isRef, onMounted, ref, toRef, watch } from 'vue'
 import { getCoreRowModel, getPaginationRowModel, useVueTable, FlexRender } from '@tanstack/vue-table'
 import { useBranchStore } from '@/stores/branches'
-import {parseISO, format} from 'date-fns'
+import { parseISO, format } from 'date-fns'
 import '@vuepic/vue-datepicker/dist/main.css';
 
 const conformDate = (date) => format(date, 'yyyy-MM-dd')
 
-const latestDate = ref( conformDate(new Date()))
+const latestDate = ref(conformDate(new Date()))
 
 watch(latestDate, (newVal, oldVal) => {
-  console.log(newVal, "turned from",oldVal)
-  setTimeout(()=>console.log(latestDate.value, typeof latestDate.value, 'LATEST VALUE NEW'), 1000)
+  console.log(newVal, "turned from", oldVal)
+  setTimeout(() => console.log(latestDate.value, typeof latestDate.value, 'LATEST VALUE NEW'), 1000)
 })
 
 const salesStore = useDailySalesStore()
-const {sales} = storeToRefs(salesStore)
+const { sales } = storeToRefs(salesStore)
 const selectedBranchId = ref(1)
 
 const outputFormat = (record) => ({
@@ -64,36 +60,36 @@ const outputFormat = (record) => ({
   created_at: record.created_at
 })
 
-const selectDate = (date) => {latestDate.value = conformDate(date)}
+const selectDate = (date) => { latestDate.value = conformDate(date) }
 
 const filteredData = computed(() => {
 
-  let result =  sales.value
+  let result = sales.value
 
-  if (selectedBranchId.value != 0){
+  if (selectedBranchId.value != 0) {
     result = result.filter(sale => sale.branch_id === selectedBranchId.value)
   }
 
-  if(latestDate.value){
+  if (latestDate.value) {
     console.log('=-=-=-=-=-=-=-=-=-')
     result = result.filter(sale => conformDate(new Date(sale.created_at)) === conformDate(latestDate.value))
     console.log(result, "result")
   }
 
 
-  return result.flatMap(record =>outputFormat(record));
+  return result.flatMap(record => outputFormat(record));
 });
 
 const branchStore = useBranchStore()
 
-const {branches} = storeToRefs(branchStore)
+const { branches } = storeToRefs(branchStore)
 
-onMounted(()=> {
-  salesStore.getData()
+onMounted(() => {
+  salesStore.getDailySales()
   branchStore.getBranches()
 })
 
-watch(selectedBranchId, (newVal, oldVal) => {console.log(newVal, "turned from",oldVal) })
+watch(selectedBranchId, (newVal, oldVal) => { console.log(newVal, "turned from", oldVal) })
 
 const columns = [
   {
@@ -124,11 +120,11 @@ const selectBranch = (id) => {
 }
 
 const tableOptions = {
-  get data(){
+  get data() {
     return filteredData.value
   },
-  get columns(){
-  return columns
+  get columns() {
+    return columns
   },
   getCoreRowModel: getCoreRowModel(),
 }
@@ -143,6 +139,7 @@ const table = useVueTable(tableOptions)
   margin: 5px;
   cursor: pointer;
 }
+
 .tabs .active {
   background-color: #007BFF;
   color: white;

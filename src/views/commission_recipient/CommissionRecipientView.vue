@@ -79,7 +79,7 @@ const confirmDelete = async () => {
 }
 
 onMounted(() => {
-  dataStore.getCommission
+  dataStore.getCommission()
 })
 
 const columns = [

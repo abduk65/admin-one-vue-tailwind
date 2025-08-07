@@ -33,7 +33,7 @@ const schema = Yup.object({
 onMounted(async () => {
   console.log('Mounted ID:', props.id); // Debug log
   await Promise.all([
-    unitStore.getUnits
+    unitStore.getUnits()
   ]);
 });
 

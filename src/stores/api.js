@@ -1,16 +1,31 @@
 import axios from 'axios'
 import axiosClient from '@/stores/axios'
 
-export const getRequest = async (store, uri, idPassed) => {
+// export const getRequest = async (store, uri, idPassed) => {
+//   try {
+//     const id = idPassed ?? '';
+//     const url = `/${uri}/${id}`
+//     const response = await axiosClient.get(url);
+//     store.data.value = response.data;
+//   } catch (e) {
+//     console.error(e);
+//   }
+// }
+
+export const getRequest = async (uri, idPassed) => {
   try {
     const id = idPassed ?? '';
     const url = `/${uri}/${id}`
+    console.log(url, idPassed, 'EVK');
+
     const response = await axiosClient.get(url);
-    store.data.value = response.data;
+    console.log(url, response, 'EVK');
+    return response
   } catch (e) {
-    console.error(e);
+    console.log('Error Occured WHILE FETCHING THE Data', e)
   }
 }
+
 
 export const postRequest = async (gebi, uri,) => {
   try {

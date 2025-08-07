@@ -30,6 +30,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   const login = async (userData) => {
     try {
+      console.log('Full URLKE AUTHENTICATION FILE:', axiosClient.defaults.baseURL + '/login');
+
       const { data } = await axiosClient.post('/login', userData);
       user.value = data;
       localStorage.setItem('authToken', data.user.token);
@@ -62,7 +64,14 @@ export const useAuthStore = defineStore('auth', () => {
     router.push({ name: 'login' });
   };
 
-  const getUser = getRequest({ data }, 'users')
+  // const getUser = getRequest({ data }, 'users')
+  const getUser = async () => {
+    try {
+      data.value = (await getRequest('users')).data
+    } catch (error) {
+      console.log('random user fetching code', error)
+    }
+  }
 
   return {
     user,

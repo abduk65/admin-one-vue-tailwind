@@ -59,7 +59,7 @@ const { data: commissionRecipients } = storeToRefs(commissionRecipientStore)
 onMounted(async () => {
   await productStore.getProducts()
   console.log(products, "products")
-  await commissionRecipientStore.getCommission
+  await commissionRecipientStore.getCommission()
   console.log(commissionRecipients, "recipe")
 })
 

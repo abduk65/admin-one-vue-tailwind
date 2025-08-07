@@ -49,7 +49,7 @@ const { data } = storeToRefs(dataStore)
 
 
 onMounted(() => {
-  dataStore.getBranches
+  dataStore.getStandardBatchVariety()
 });
 
 const columns = [

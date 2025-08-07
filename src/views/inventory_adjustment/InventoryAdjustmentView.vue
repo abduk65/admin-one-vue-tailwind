@@ -28,7 +28,7 @@ const columns = [
     "header": "ID"
   },
   {
-    "accessorKey": "inventory_item",
+    "accessorKey": "inventory_item.item_name",
     "header": "Item"
   },
   {
@@ -36,11 +36,11 @@ const columns = [
     "header": "Quantity"
   },
   {
-    "accessorKey": "adjustment_type",
+    "accessorKey": "operation",
     "header": "Adjustment Type"
   },
   {
-    "accessorKey": "date",
+    "accessorKey": "created_at",
     "header": "Date"
   }
 ]

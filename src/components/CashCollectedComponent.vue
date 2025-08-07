@@ -1,14 +1,14 @@
 <template>
-    <form @submit.prevent="submitForm" >
-      <FormField label="Branch">
-        <FormControl v-model="cashCollected.branch_id" :error="errors" :options="branches" />
-      </FormField>
-      <FormField label="Amount">
-        <FormControl v-model="cashCollected.amount" :error="errors" />
-      </FormField>
+  <form @submit.prevent="submitForm">
+    <FormField label="Branch">
+      <FormControl v-model="cashCollected.branch_id" :error="errors" :options="branches" />
+    </FormField>
+    <FormField label="Amount">
+      <FormControl v-model="cashCollected.amount" :error="errors" />
+    </FormField>
 
-      <BaseButton type="submit" label="Submit" :loading="isSubmitting" />
-    </form>
+    <BaseButton type="submit" label="Submit" :loading="isSubmitting" />
+  </form>
 </template>
 
 <script setup>
@@ -27,11 +27,11 @@ const route = useRoute()
 const branchStore = useBranchStore()
 const branchId = computed(() => route.params.id)
 const isEditing = computed(() => !!branchId.value)
-const branches = computed(() => branchStore.data)
+const branches = computed(() => branchStore.branches)
 const cashCollectedStore = useCashCollectedStore()
 
 onMounted(() => {
-  branchStore.getBranches
+  branchStore.getBranches()
 })
 
 const cashCollected = reactive({
@@ -57,16 +57,15 @@ const submitForm = async (e) => {
 
   try {
     const response = await cashCollectedStore.createCashCollected(cashCollected)
+    console.log(response, 'CASH COLLECTED RAMADAN')
     // if (response.status === 200) {
     router.push('/cashCollected')
     // }
   } catch (error) {
-    console.log(error, 'ERROR')
+    console.log(error, 'ERROR CASH COLLECTED RAMADAN')
   } finally {
     isSubmitting.value = false
   }
 }
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

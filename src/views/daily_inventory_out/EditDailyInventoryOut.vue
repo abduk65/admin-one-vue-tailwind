@@ -28,6 +28,7 @@ import { useDailyInventoryOut } from '@/stores/dailyInventoryOut';
 import { useInventoryItemStore } from '@/stores/inventoryItem';
 import { useUnitStore } from '@/stores/unit';
 import { useAuthStore } from '@/stores/authentication';
+import { useRouter } from 'vue-router';
 
 const props = defineProps(['id']);
 const dailyInventoryOutStore = useDailyInventoryOut();
@@ -44,10 +45,10 @@ const schema = Yup.object({
 
 onMounted(async () => {
   await Promise.all([
-    dailyInventoryOutStore.getDailyInventoryOut,
-    inventoryItemStore.getInventoryItem,
-    unitStore.getUnits,
-    userStore.getUser
+    dailyInventoryOutStore.getDailyInventoryOut(),
+    inventoryItemStore.getInventoryItem(),
+    unitStore.getUnits(),
+    userStore.getUser()
   ]);
 });
 
@@ -88,6 +89,8 @@ const formattedUserOptions = computed(() =>
   }))
 );
 
+const router = useRouter()
+
 const onSubmit = async (values) => {
   const updateData = {
     id: props.id,
@@ -98,6 +101,10 @@ const onSubmit = async (values) => {
   };
 
   console.log('Submitting:', updateData);
-  await dailyInventoryOutStore.putData(updateData, 'daily-inventory-outs');
+  const response = await dailyInventoryOutStore.putData(updateData, 'dailyInventoryOut');
+  console.log(response, 'RRRRRRR-R--------------R-R-R-R-')
+  if (response.data.id) {
+    router.push('/dailyInventoryOut')
+  }
 };
 </script>

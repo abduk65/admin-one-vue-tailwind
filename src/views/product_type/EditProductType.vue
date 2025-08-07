@@ -42,7 +42,7 @@ const initialData = computed(() => {
 });
 
 onMounted(async () => {
-  await productTypeStore.getProductType;
+  await productTypeStore.getProductType();
 });
 
 const onSubmit = async (values) => {

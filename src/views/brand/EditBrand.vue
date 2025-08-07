@@ -37,8 +37,8 @@ const schema = Yup.object({
 
 onMounted(async () => {
   await Promise.all([
-    brandStore.getData,
-    productTypeStore.getProductType
+    brandStore.getBrands(),
+    productTypeStore.getProductType()
   ]);
 });
 

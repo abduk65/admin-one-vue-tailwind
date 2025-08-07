@@ -6,9 +6,15 @@ export const useProductTypeStore = defineStore("product_type", () => {
   const data = ref([])
 
   const uri = "productType"
-  const getProductType = getRequest({ data }, uri)
+  const getProductType = async () => {
+    try {
+      data.value = (await getRequest(uri)).data
+    } catch (error) {
+      console.log(error, "Error in ProductType store")
+    }
+  }
   const createProductType = (incoming) => postRequest(incoming, uri)
   const updateProductType = (incoming) => putRequest(incoming, uri)
-  
+
   return { data, getProductType, createProductType, updateProductType }
 })

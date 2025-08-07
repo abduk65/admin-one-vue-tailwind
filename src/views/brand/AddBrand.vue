@@ -3,8 +3,8 @@
     <SectionMain>
       <FormField label="Add Brand">
         <FormControl v-model="form.name" />
-        <FormControl  v-model="form.product_type" :options="selectOptions"  />
-        <BaseButton @click="handleForm" label="Submit Record"/>
+        <FormControl v-model="form.product_type" :options="selectOptions" />
+        <BaseButton @click="handleForm" label="Submit Record" />
       </FormField>
     </SectionMain>
   </LayoutAuthenticated>
@@ -28,7 +28,7 @@ import SectionMain from '@/components/section/SectionMain.vue'
 
 const productTypeStore = useProductTypeStore()
 const brandStore = useBrandStore()
-const { data } =storeToRefs(productTypeStore)
+const { data } = storeToRefs(productTypeStore)
 const schema = yup.object({
   email: yup.string().email().required('Email is required'),
   name: yup.string().required('Name is required'),
@@ -49,14 +49,14 @@ const formSchema = {
       label: 'Your Password',
       name: 'password',
       as: 'input',
-      type:"password",
+      type: "password",
       rules: yup.string().min(6).required('Password is required'),
     },
   ],
 };
 const onSubmitForm = (values) => console.log(JSON.stringify(values, null, 2));
 
-const validateEmail  = (value)  => {
+const validateEmail = (value) => {
   // if the field is empty
   if (!value) {
     return 'This field is required';
@@ -69,21 +69,31 @@ const validateEmail  = (value)  => {
   // All is good
   return true;
 }
-const handleForm = (nef)=> {
+
+const router = useRouter()
+const route = useRoute()
+
+const handleForm = async (nef) => {
   console.log(form, 'clicked m ')
   console.log(nef, 'clicked ef')
-  brandStore.postData(form, 'brands')
+  try {
+    const resu = await brandStore.postData(form, 'brands')
+    router.push('/brands')
+  } catch (error) {
+    console.log(error.status, 'REPOSNSSN BE BADO')
+  }
+
 }
 
-onMounted(()=>{
-  productTypeStore.getProductType
+onMounted(() => {
+  productTypeStore.getProductType()
 })
 
 
 
-const selectOptions = computed(()=>data.value.map(br=> ({id: br.id, name:br.name})))
+const selectOptions = computed(() => data.value.map(br => ({ id: br.id, name: br.name })))
 // const selectOptions = computed(()=>data.value.map(br=> br.name))
-setTimeout(()=>console.log(selectOptions)
+setTimeout(() => console.log(selectOptions)
   , 1000)
 const form = reactive({
   name: '',
@@ -91,8 +101,7 @@ const form = reactive({
 })
 // Form state and errors
 
-const router = useRouter()
-const route = useRoute()
+
 const props = defineProps(['id'])
 
 const errors = reactive({

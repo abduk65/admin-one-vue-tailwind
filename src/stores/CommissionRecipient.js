@@ -7,7 +7,13 @@ import axiosClient from './axios'
 export const useCommissionRecipientStore = defineStore('commission_recipient', () => {
   const data = ref([])
   const uri = 'commissionRecipients'
-  const getCommission = getRequest({ data }, uri)
+  const getCommission = async () => {
+    try {
+      data.value = (await getRequest(uri)).data
+    } catch (error) {
+      console.log(error, "Error in CommissionRecipient store")
+    }
+  }
   const postCommission = (payload) => postRequest(payload, uri)
   const putCommission = (payload) => putRequest(payload, uri)
 

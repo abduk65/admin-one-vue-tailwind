@@ -7,7 +7,13 @@ export const useWorkOrderStore = defineStore('workOrderStore', () => {
   const error = ref(null)
   const data = ref([])
 
-  const getWorkOrders = getRequest({ data }, 'workOrder')
+  const getWorkOrders = async () => {
+    try {
+      data.value = (await getRequest('workOrder')).data
+    } catch (error) {
+      console.log(error, "Error in WorkOrder store")
+    }
+  }
   const createWorkOrder = async (incoming) => postRequest(incoming, 'workOrder')
 
   return {

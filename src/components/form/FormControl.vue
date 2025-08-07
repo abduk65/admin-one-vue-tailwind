@@ -141,8 +141,8 @@ if (props.ctrlKFocus) {
   <div class="relative">
     <select v-if="computedType === 'select'" :id="id" v-model="computedValue" :name="name" :class="inputElClass">
       <option value="">Select an option</option>
-      <option v-for="option in options" :key="option.id" :value="option.id">
-        {{ option[optionLabel] }}
+      <option v-for="option in options" :key="option.id" :value="option.id ?? option.value">
+        {{ option[optionLabel] ?? option.item_name }}
       </option>
     </select>
     <textarea v-else-if="computedType === 'textarea'" :id="id" v-model="computedValue" :class="inputElClass"

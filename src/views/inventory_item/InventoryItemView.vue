@@ -46,16 +46,13 @@ import { useRouter } from 'vue-router'
 
 
 const dataStore = useInventoryItemStore();
-const brandStore = useBrandStore();
 const { data } = storeToRefs(dataStore)
 
-const brand = brandStore.getData
 const router = useRouter()
 const editRecord = (record) => router.push({ name: "EditInventoryItem", params: { id: record.original.id } })
 
 onMounted(() => {
-  dataStore.getInventoryItem
-  brandStore.getData
+  dataStore.getInventoryItem()
 });
 
 const columns = [

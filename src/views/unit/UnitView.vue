@@ -56,7 +56,7 @@ const editRecord = (record) => {
 const deleteRecord = (id) => console.log(id, "To be deleted")
 
 onMounted(() => {
-  dataStore.getUnits
+  dataStore.getUnits()
 });
 
 const columns = [

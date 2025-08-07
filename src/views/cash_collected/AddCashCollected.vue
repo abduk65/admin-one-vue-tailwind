@@ -25,11 +25,11 @@ const route = useRoute()
 const branchStore = useBranchStore()
 const branchId = computed(() => route.params.id)
 const isEditing = computed(() => !!branchId.value)
-const branches = computed(() => branchStore.data)
+const branches = computed(() => branchStore.branches)
 const cashCollectedStore = useCashCollectedStore()
 
 onMounted(() => {
-  branchStore.getBranches
+  branchStore.getBranches()
 })
 
 const cashCollected = reactive({

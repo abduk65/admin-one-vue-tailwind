@@ -23,6 +23,10 @@
       <CardBox>
         <CardBoxComponentEmpty />
       </CardBox>
+      <CardBoxModal v-model="isModalActive" title="Please confirm" button="danger" buttonLabel="Confirm" has-cancel
+        @confirm="confirmDelete">
+        <p>Are you sure you want to delete this brand?</p>
+      </CardBoxModal>
     </SectionMain>
   </LayoutAuthenticated>
 </template>
@@ -44,22 +48,33 @@ import { useBranchStore } from '@/stores/branches'
 import { storeToRefs } from 'pinia'
 import { useBrandStore } from '@/stores/brands'
 import { useRoute, useRouter } from 'vue-router'
+import CardBoxModal from '@/components/cardbox/CardBoxModal.vue'
 
 const dataStore = useBrandStore();
 const { data } = storeToRefs(dataStore)
 const router = useRouter()
 
 onMounted(() => {
-  dataStore.getData
+  dataStore.getBrands()
 });
 
 const editRecord = (record) => {
   router.push({ name: "EditBrand", params: { id: record.original.id } })
 }
 
+const isModalActive = ref(false)
+const brandToDelete = ref(null)
+
 const deleteRecord = (record) => {
-  console.log('id', record.id, record.original)
-  dataStore.deleteData(record.original.id)
+  brandToDelete.value = record.original
+  isModalActive.value = true
+}
+
+const confirmDelete = () => {
+  if (brandToDelete.value) {
+    dataStore.deleteData(brandToDelete.value.id)
+    brandToDelete.value = null
+  }
 }
 
 const columns = [

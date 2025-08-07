@@ -46,8 +46,8 @@ const { data: unitData } = storeToRefs(unitStore)
 const { data } = storeToRefs(brandStore)
 
 onMounted(() => {
-  brandStore.getData
-  unitStore.getUnits
+  brandStore.getBrands()
+  unitStore.getUnits()
 })
 
 const brands = computed(() => data.value)

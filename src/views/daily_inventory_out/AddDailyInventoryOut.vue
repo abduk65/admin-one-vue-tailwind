@@ -39,7 +39,6 @@ const dailyInventoryOutId = computed(() => route.params.id)
 const isEditing = computed(() => dailyInventoryOutId.value ? true : false)
 
 const dailyInventoryOutStore = useDailyInventoryOut()
-const { isLoading, error } = storeToRefs(dailyInventoryOutStore)
 
 const dailyInventoryOut = reactive({
   user_id: "", receiver_user_id: "", quantity: "", inventory_item_id: "", unit_id: ""
@@ -57,9 +56,10 @@ const unitStore = useUnitStore()
 const { data: units } = storeToRefs(unitStore)
 
 onMounted(async () => {
-  auth.getUser
-  inventoryItemStore.getInventoryItem
-  unitStore.getUnit
+
+  auth.getUser()
+  inventoryItemStore.getInventoryItem()
+  unitStore.getUnits()
 
   // console.log(users.value, 'user')
   console.log(inventoryItems, 'inventory')

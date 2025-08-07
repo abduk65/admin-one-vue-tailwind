@@ -46,7 +46,7 @@ const dataStore = useProductTypeStore();
 const { data } = storeToRefs(dataStore)
 
 onMounted(() => {
-  dataStore.getProductType
+  dataStore.getProductType()
 });
 
 const columns = [

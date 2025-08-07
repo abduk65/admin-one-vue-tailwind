@@ -98,6 +98,6 @@ const submitForm = async () => {
 
 onMounted(async () => {
   await branchStore.getBranches;
-  await userStore.getUser;
+  await userStore.getUser();
 });
 </script>

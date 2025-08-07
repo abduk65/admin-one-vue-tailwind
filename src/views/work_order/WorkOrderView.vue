@@ -48,7 +48,7 @@ const dataStore = useWorkOrderStore();
 const { data } = storeToRefs(dataStore)
 
 onMounted(() => {
-  dataStore.getWorkOrders
+  dataStore.getWorkOrders()
 });
 
 const columns = [

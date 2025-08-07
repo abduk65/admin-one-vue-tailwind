@@ -14,9 +14,8 @@ export const useInventoryAdjustmentStore = defineStore('inventoryAdjustment', ()
     try {
       // const response = await axios.get('/inventoryAdjustment')
       const uri = 'inventoryAdjustment'
-      const url = `/${uri}`
-      const response = await axiosClient.get(url);
-      console.log('GGG', response)
+      const response = await axiosClient.get(uri);
+      console.log('INVENTORY ADJ', response)
       inventoryAdjustments.value = response.data
       return response.data
     } catch (error) {
@@ -43,7 +42,10 @@ export const useInventoryAdjustmentStore = defineStore('inventoryAdjustment', ()
   const createInventoryAdjustment = async (data) => {
     loading.value = true
     try {
-      const response = await axios.post('inventoryAdjustment', data)
+      console.log(data, 'BEOFRE     ')
+
+      const response = await axiosClient.post('inventoryAdjustment', data)
+      console.log(response, 'INSISISISISIS')
       inventoryAdjustments.value.push(response.data)
       return response.data
     } catch (error) {

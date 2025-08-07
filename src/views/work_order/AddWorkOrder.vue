@@ -70,7 +70,7 @@ const handleVarietyFactorClick = () => {
 }
 
 onMounted(() => {
-  useStandardBatchVarietyStore.getStandardBatchVariety
+  useStandardBatchVarietyStore.getStandardBatchVariety()
 })
 
 const workOrder = reactive({

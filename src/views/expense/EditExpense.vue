@@ -9,31 +9,14 @@
         <Form v-if="initialData" :initial-values="initialData" @submit="onSubmit" :validation-schema="schema">
           <ValidatedFormControl name="description" label="Description" />
           <ValidatedFormControl name="amount" type="number" label="Amount" />
-          <ValidatedFormControl
-            name="branch_id"
-            label="Branch"
-            :options="formattedBranchOptions"
-            type="select"
-            option-label="name"
-          />
-          <ValidatedFormControl
-            name="user_id"
-            label="User"
-            :options="formattedUserOptions"
-            type="select"
-            option-label="name"
-          />
-          <ValidatedFormControl
-            name="type"
-            label="Type"
-            :options="[
-              { id: 'expected', name: 'Expected' },
-              { id: 'unexpected', name: 'Unexpected' }
-            ]"
-            type="select"
-            option-label="name"
-            option-value="id"
-          />
+          <ValidatedFormControl name="branch_id" label="Branch" :options="formattedBranchOptions" type="select"
+            option-label="name" />
+          <ValidatedFormControl name="user_id" label="User" :options="formattedUserOptions" type="select"
+            option-label="name" />
+          <ValidatedFormControl name="type" label="Type" :options="[
+            { id: 'expected', name: 'Expected' },
+            { id: 'unexpected', name: 'Unexpected' }
+          ]" type="select" option-label="name" option-value="id" />
           <BaseButton type="submit" label="Update Expense" />
         </Form>
       </CardBox>
@@ -91,15 +74,15 @@ const formattedUserOptions = computed(() => {
 
 onMounted(async () => {
   await Promise.all([
-    expensesStore.getExpense,
+    expensesStore.getExpenses(),
     branchStore.getBranches,
-    userStore.getUser
+    userStore.getUser()
   ]);
 });
 
 const onSubmit = async (values) => {
   try {
-    await expensesStore.updateExpense(route.params.id, values);
+    await expensesStore.updateExpense(values);
     router.push('/expenses');
   } catch (error) {
     console.error('Failed to update expense:', error);

@@ -11,7 +11,13 @@ export const useUnitStore = defineStore('unit', () => {
   const url = 'units'
   const data = ref([])
 
-  const getUnits = getRequest({ data }, url)
+  const getUnits = async () => {
+    try {
+      data.value = (await getRequest(url)).data
+    } catch (error) {
+      console.log(error, "Error in Unit store")
+    }
+  }
 
   const createUnit = (incoming) => postRequest(incoming, url)
 

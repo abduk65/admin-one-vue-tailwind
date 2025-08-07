@@ -435,6 +435,18 @@ const routes = [
         name: 'AddCashCollected',
         component: () => import('@/views/cash_collected/AddCashCollected.vue')
       },
+      {
+        meta: {
+          title: 'Edit Cash Collected'
+          ,
+          allowedRoles: ['worker', 'store_keeper', 'admin']
+        }
+        ,
+        path: '/editCashCollected/:id',
+        name: 'EditCashCollected',
+        component: () => import('@/views/cash_collected/EditCashCollected.vue'),
+        props: true
+      },
 
       {
         meta: {

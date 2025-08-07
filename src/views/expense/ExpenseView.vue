@@ -47,7 +47,7 @@ const dataStore = useExpensesStore();
 const { data: expenses } = storeToRefs(dataStore)
 
 onMounted(() => {
-  dataStore.getExpense
+  dataStore.getExpenses()
 });
 
 const router = useRouter();

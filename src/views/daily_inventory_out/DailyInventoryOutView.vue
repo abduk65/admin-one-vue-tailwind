@@ -54,7 +54,7 @@ const editRecord = (record) => router.push({ name: "EditDailyInventoryOut", para
 const deleteRecord = (id) => console.log(id, "to be deleted inventory out")
 
 onMounted(() => {
-  dataStore.getDailyInventoryOut
+  dataStore.getDailyInventoryOut()
 });
 
 const columns = [

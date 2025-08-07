@@ -41,8 +41,8 @@ const schema = Yup.object({
 onMounted(async () => {
   console.log('Mounted ID:', props.id); // Debug log
   await Promise.all([
-    commissionStore.getCommission,
-    commissionRecipientStore.getCommission
+    commissionStore.getCommission(),
+    commissionRecipientStore.getCommission()
   ]);
   productStore.getProducts()
 });

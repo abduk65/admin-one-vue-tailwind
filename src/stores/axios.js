@@ -9,4 +9,10 @@ axiosClient.interceptors.request.use(config => {
   return config;
 })
 
+// Add this after your axiosClient creation
+axiosClient.interceptors.request.use(config => {
+  console.log('Full URL:', config.baseURL + config.url);
+  return config;
+});
+
 export default axiosClient;
